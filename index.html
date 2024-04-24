@@ -1,1 +1,37 @@
-Hello World!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Widgets</title>
+<style>
+  .time-widgets {
+    display: flex;
+    justify-content: space-around; /* Centers the widgets and adds space between them */
+    background-color: #333; /* Optional: sets a background color for the container */
+ /* Adds some padding around the widgets */
+  }
+  .clock-widget-text {
+    color: #ffffff; /* Sets the text color to white */
+    background-color: #000000; /* Sets the background color to black */
+    padding: 10px;
+    border-radius: 5px; /* Optional: adds rounded corners */
+  }
+</style>
+</head>
+<body>
+
+<div class="time-widgets">
+  <a href="https://logwork.com/current-time-in-london-united-kingdom-city-of-london" class="clock-widget-text" data-timezone="Europe/London" data-language="en" data-textcolor="#ffffff" data-background="#000000" data-digitscolor="#ffffff">
+    London, United Kingdom
+  </a>
+
+  <a href="https://logwork.com/current-time-in-new-york-united-states" class="clock-widget-text" data-timezone="America/New_York" data-language="en" data-textcolor="#ffffff" data-background="#000000" data-digitscolor="#ffffff">
+    New York, United States
+  </a>
+</div>
+
+<script src="https://cdn.logwork.com/widget/text.js"></script>
+
+</body>
+</html>
