@@ -1,2 +1,101 @@
-<script src="https://cdn.logwork.com/widget/text.js"></script>
-<a href="https://logwork.com/current-time-in-new-york-united-states" class="clock-widget-text" data-timezone="America/New_York" data-language="en" data-textcolor="#ffffff" data-background="#000000" data-digitscolor="#ffffff">New York, United States</a>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.clockdate-wrapper {
+    background-color: #333;
+    padding:15px;
+    max-width:700px;
+    width:100%;
+    text-align:center;
+    border-radius:5px;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+#clock, #nyClock {
+    background-color:#333;
+    font-family: sans-serif;
+    font-size:50px;
+    text-shadow:0px 0px 1px #fff;
+    color:#fff;
+}
+#clock span, #nyClock span {
+    color:#888;
+    text-shadow:0px 0px 1px #333;
+    font-size:50px;
+    position:relative;
+    top:-5px;
+    left:10px;
+}
+#date, #nyDate, #londonTime, #nyTime {
+    letter-spacing:3px;
+    font-size:14px;
+    font-family:arial,sans-serif;
+    color:#fff;
+}
+#londonTime, #nyTime {
+    font-size:12px;
+    color: #bbb;
+    padding-top: 5px;
+}
+</style>
+</head>
+<body onload="startTime()">
+<div id="clockdate">
+    <div class="clockdate-wrapper">
+        <div>
+            <div id="clock"></div>
+            <div id="date"></div>
+            <div id="londonTime">London, UK</div>
+        </div>
+        <div>
+            <div id="nyClock"></div>
+            <div id="nyDate"></div>
+            <div id="nyTime">New York, USA</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function startTime() {
+    var london = new Date().toLocaleString("en-US", {timeZone: "Europe/London"});
+    london = new Date(london);
+    var ny = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+    ny = new Date(ny);
+
+    updateClock(london, 'clock', 'date');
+    updateClock(ny, 'nyClock', 'nyDate');
+
+    var time = setTimeout(function(){ startTime() }, 500);
+}
+
+function updateClock(loc, clockId, dateId) {
+    var hr = loc.getHours();
+    var min = loc.getMinutes();
+    var sec = loc.getSeconds();
+    var ap = (hr < 12) ? "AM" : "PM";
+    hr = (hr == 0) ? 12 : hr;
+    hr = (hr > 12) ? hr - 12 : hr;
+    hr = checkTime(hr);
+    min = checkTime(min);
+    sec = checkTime(sec);
+    document.getElementById(clockId).innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    var curWeekDay = days[loc.getDay()];
+    var curDay = loc.getDate();
+    var curMonth = months[loc.getMonth()];
+    var curYear = loc.getFullYear();
+    var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+    document.getElementById(dateId).innerHTML = date;
+}
+
+function checkTime(i) {
+    if (i < 10) { i = "0" + i; }
+    return i;
+}
+</script>
+</body>
+</html>
